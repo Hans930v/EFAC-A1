@@ -21,5 +21,5 @@ EFAC-A1 uses external hardware (such as a stepper motor-controlled feeder) to ch
 ### Step-by-Step Process:
 1. **Gcode Workflow**: Use the provided Gcode files for semi-automatic or manual filament change.
 2. **External Feeder Setup**: Connect your external filament feeder to the printer and ensure the Gcode works with your current setup.
-3. **Filament Change**: The Gcode will control filament unloading, loading, and switching, mimicking AMS behavior.
+3. **Filament Change**: The Gcode will control filament unloading, flushing, and loading, mimicking AMS behavior.
 4. **Flush Volumes**: Supports automatic purging/flush volumes for clean filament transitions.
