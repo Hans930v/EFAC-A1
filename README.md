@@ -34,7 +34,7 @@ For a single system (4 Colors):
 
 ---
 
-2.  1pc [MCP23017 IO expansion board](https://shopee.ph/MCP23017-Serial-Interface-Module-IIC-I2C-SPI-Bidirectional-16-Bit-I-O-Expander-Pins-10Mhz-Serial-Interface-Module-i.580325202.27183227733?xptdk=74381da7-727c-4895-b49d-59258a37f182)
+2.  1pc [MCP23017 I/O expansion board](https://shopee.ph/MCP23017-Serial-Interface-Module-IIC-I2C-SPI-Bidirectional-16-Bit-I-O-Expander-Pins-10Mhz-Serial-Interface-Module-i.580325202.27183227733?xptdk=74381da7-727c-4895-b49d-59258a37f182)
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/7a4aa11f-97c5-4041-973e-b8fb26e02787" />  
 
 ---
