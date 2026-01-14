@@ -74,7 +74,7 @@ For a single system (4 Colors):
 
 ---
 
-10. 1pc [24V 3A AC‑DC power supply (100–240VAC input) with a 5.5mm x 2.1mm DC jack output](https://shopee.ph/ZJW-DC24V-Adapt-2A-3A-5A-Power-Supply-24V-LED-Power-Adaptor-i.299909911.3595544010?extraParams=%7B%22display_model_id%22%3A83704275368%2C%22model_selection_logic%22%3A3%7D&sp_atk=40caa47a-5f99-4069-a0ea-1906a6c2429b&xptdk=40caa47a-5f99-4069-a0ea-1906a6c2429b)
+10. 1pc [24V 3A AC‑DC power supply (100–240VAC input)](https://shopee.ph/ZJW-DC24V-Adapt-2A-3A-5A-Power-Supply-24V-LED-Power-Adaptor-i.299909911.3595544010?extraParams=%7B%22display_model_id%22%3A83704275368%2C%22model_selection_logic%22%3A3%7D&sp_atk=40caa47a-5f99-4069-a0ea-1906a6c2429b&xptdk=40caa47a-5f99-4069-a0ea-1906a6c2429b) with a 5.5mm x 2.1mm DC jack output & Polarity of Inside-Positive; Outside-Negative
 
 ## Features
 - **Software-Safe**: No firmware modifications required.
@@ -91,5 +91,11 @@ EFAC-A1 uses external hardware (such as a stepper motor-controlled feeder) to ch
 3. **Filament Change**: The Gcode will control filament unloading, flushing, and loading, mimicking AMS behavior.
 4. **Flush Volumes**: Supports automatic purging/flush volumes for clean filament transitions.
 
-### Disclaimer
-This project is intended as a budget-friendly alternative to AMS for Bambu Lab A1 users without breaking printer firmware and is **NOT** affiliated with Bambu Lab. Use at your own risk, and always ensure proper setup and testing before full implementation. Enjoy!
+# Disclaimer
+EFAC-A1 is an **UNOFFICIAL** solution designed as a budget-friendly alternative to the Bambu Lab AMS. While it mimics **SOME** of AMS’s functions, it does so **WITHOUT** modifying printer firmware and doesn’t require AMS hardware. This is **NOT** affiliated with Bambu Lab, and users should be mindful of potential limitations. Always test thoroughly before full implementation.
+
+By using EFAC-A1, you acknowledge that it requires **MANUAL SETUP**, some hardware adjustments, and **CUSTOM G-codes**. As this is a **user-driven** solution, all modifications and troubleshooting are done at your own risk. Please ensure that you thoroughly understand the setup before implementation.
+
+While this project aims to provide functionality similar to AMS, it **DOES NOT REPLACE** the official AMS system, and the performance may vary based on your specific setup. I’m here to help with support and troubleshooting, so feel free to reach out if you ever need some assistance!
+
+Enjoy your EFAC!
