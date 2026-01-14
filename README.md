@@ -15,7 +15,7 @@ EFAC-A1 provides AMS-like behavior using an external feeder, without using the A
 
 ### Actual: <img width="1080" height="1383" alt="image" src="https://github.com/user-attachments/assets/0e4348db-0144-410f-b911-c2487b44f231" />
 
-## Gcodes
+## Change Filament G-codes
 ### Semi-Automatic Change Filament Gcode
 For users who want the full EFAC-A1 (external hardware required):
 [**Change Filament Gcode for EFAC-A1**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAC-A1.gcode)
@@ -24,7 +24,7 @@ For users who want the full EFAC-A1 (external hardware required):
 For users who prefer manual filament change (no hardware):
 [**Change Filament Gcode for EFAC-A1 - Manual**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAmC-A1.gcode)
 
-> **Disclaimer**: These are **NOT** official Bambu Lab Gcodes. They are a third-party solution for users who want a budget-friendly alternative to the AMS.
+> **Disclaimer**: These are **NOT** official Bambu Lab Gcodes. These are third-party G-codes for users who want a budget-friendly alternative to the AMS.
 
 ## Hardware
 For a single system (4 Colors):
