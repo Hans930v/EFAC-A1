@@ -24,7 +24,7 @@ For users who want the full EFAC-A1 (external hardware required):
 For users who prefer manual filament change (no hardware):
 [**Change Filament Gcode for EFAC-A1 - Manual**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAmC-A1.gcode)
 
-> **Disclaimer**: These are **NOT** an official Bambu Lab Gcodes. They are a third-party solution for users who want a budget-friendly alternative to the AMS.
+> **Disclaimer**: These are **NOT** official Bambu Lab Gcodes. They are a third-party solution for users who want a budget-friendly alternative to the AMS.
 
 ## Hardware
 For a single system (4 Colors):
