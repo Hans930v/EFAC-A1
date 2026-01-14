@@ -10,6 +10,11 @@ EFAC-A1 provides AMS-like behavior using an external feeder, without using the A
 - Firmware‑safe: uses official AMS flush logic, so slicer reports stay accurate.
 - Tested: slicer said 8.99 g, actual model & waste weighed 9.00 g → only 0.01 g difference!
 
+## Slicer Estimates vs Actual Weighing
+### Bambu Studio: <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2c704cb0-1f68-4d7f-addb-1aa7ff3d6b10" />
+
+### Actual: <img width="1080" height="1383" alt="image" src="https://github.com/user-attachments/assets/0e4348db-0144-410f-b911-c2487b44f231" />
+
 ## Gcodes
 ### Semi-Automatic Change Filament Gcode
 For users who want the full EFAC-A1 (external hardware required):
