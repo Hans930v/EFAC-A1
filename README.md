@@ -10,6 +10,9 @@ EFAC-A1 provides AMS-like behavior using an external feeder, without using the A
 - Firmware‑safe: uses official AMS flush logic, so slicer reports stay accurate.
 - Tested: slicer said 8.99 g, actual model & waste weighed 9.00 g → only 0.01 g difference!
 
+## How It Works
+EFAC-A1 uses external hardware to automatically change filaments, mimicking the AMS behavior on Bambu Lab printers. It integrates seamlessly with the EFAC custom G-code and works without requiring any changes to the printer’s firmware.
+
 ## Slicer Estimates vs Actual Weighing
 ### Bambu Studio: <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2c704cb0-1f68-4d7f-addb-1aa7ff3d6b10" />
 
@@ -26,8 +29,29 @@ For users who prefer manual filament change (no hardware):
 
 > **Disclaimer**: These are **NOT** official Bambu Lab Gcodes. These are third-party G-codes for users who want a budget-friendly alternative to the AMS.
 
+## Features
+- **Software-Safe**: No firmware modifications required.
+- **External Feeder**: Works with an external filament feeder to replicate AMS behavior.
+- **Multi-Filament Support**: Easily handle multiple filaments for diverse printing needs.
+- **Compatible with Bambu Studio**: Fully compatible with Bambu Studio for filament changes.
+
+### Step‑by‑Step Process
+
+1. **G‑code Workflow**  
+   Copy the provided G‑code files for EFAC‑A1.  
+   *(Note: EFAmC is for manual changes only and does not require hardware.)*
+
+2. **External Feeder Setup**  
+   Install the external feeder and position the sensors in their designated locations on the printer.
+
+3. **Filament Change**  
+   The G‑code manages unloading and flushing. EFAC then handles loading the new filament, replicating AMS‑style behavior without firmware modifications.
+
+4. **Flush Volumes**  
+   Automatic purging ensures clean filament transitions, with flush volumes calibrated for reliable multi‑color printing.
+
 ## Hardware
-For a single system (4 Colors):
+For Main System (Required Base, 4 Colors):
 > These are Shopee links
 1. 2pcs [Arduino nanos](https://shopee.ph/Nano-With-the-bootloader-compatible-Nano-3.0-controller-for-arduino-CH340-USB-driver-16Mhz-Nano-v3.0-ATMEGA328P-i.580325202.15423025127?extraParams=%7B%22display_model_id%22%3A114585175768%2C%22model_selection_logic%22%3A3%7D&sp_atk=36eab4fa-2527-4574-8daa-3c7e51b4ef66&xptdk=36eab4fa-2527-4574-8daa-3c7e51b4ef66)
 <img width="444.4444444444" height="250" alt="image" src="https://github.com/user-attachments/assets/dd1ac275-4fca-4d79-b1e9-ea6a61e0cb97" />
@@ -76,20 +100,36 @@ For a single system (4 Colors):
 
 10. 1pc [24V 3A AC‑DC power supply (100–240VAC input)](https://shopee.ph/ZJW-DC24V-Adapt-2A-3A-5A-Power-Supply-24V-LED-Power-Adaptor-i.299909911.3595544010?extraParams=%7B%22display_model_id%22%3A83704275368%2C%22model_selection_logic%22%3A3%7D&sp_atk=40caa47a-5f99-4069-a0ea-1906a6c2429b&xptdk=40caa47a-5f99-4069-a0ea-1906a6c2429b) with a 5.5mm x 2.1mm DC jack output & Polarity of Inside-Positive; Outside-Negative
 
-## Features
-- **Software-Safe**: No firmware modifications required.
-- **External Feeder**: Works with an external filament feeder to replicate AMS behavior.
-- **Multi-Filament Support**: Easily handle multiple filaments for diverse printing needs.
-- **Compatible with Bambu Studio**: Fully compatible with Bambu Studio for filament changes.
+## Hardware for Stacking Unit (Expansion Only, adds 4+ Colors)
+> ⚠️ **Important:** The stacking unit expands the Main System by adding 4 or more filaments.  
+> It **cannot function alone** — it does not include its own Arduino Nanos, buck converters, or power supply.  
+> Think of it as a “module” that plugs into the base system.
 
-## How It Works
-EFAC-A1 uses external hardware (such as a stepper motor-controlled feeder) to change filaments automatically, mimicking the AMS behavior on Bambu Labs printers. It integrates seamlessly with the slicer’s Gcode and works without requiring any changes to the printer’s firmware.
 
-### Step-by-Step Process:
-1. **Gcode Workflow**: Use the provided Gcode files for semi-automatic or manual filament change.
-2. **External Feeder Setup**: Connect your external filament feeder to the printer and ensure the Gcode works with your current setup.
-3. **Filament Change**: The Gcode will control filament unloading, flushing, and loading, mimicking AMS behavior.
-4. **Flush Volumes**: Supports automatic purging/flush volumes for clean filament transitions.
+1. 1pc [MCP23017 I/O expansion board](https://shopee.ph/MCP23017-Serial-Interface-Module-IIC-I2C-SPI-Bidirectional-16-Bit-I-O-Expander-Pins-10Mhz-Serial-Interface-Module-i.580325202.27183227733?xptdk=74381da7-727c-4895-b49d-59258a37f182)
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/7a4aa11f-97c5-4041-973e-b8fb26e02787" />  
+
+---
+
+2. 2pcs [TB6612FNG motor drivers](https://shopee.ph/TB6612-Dual-Motor-Driver-1A-TB6612FNG-for-Arduino-Microcontroller-Better-than-L298N-i.580325202.18881766362?extraParams=%7B%22display_model_id%22%3A99396069681%2C%22model_selection_logic%22%3A3%7D&sp_atk=7dc76370-ea4b-476f-81e1-8f0ead94dba9&xptdk=7dc76370-ea4b-476f-81e1-8f0ead94dba9)
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/bdca9196-939e-471d-acd3-0f901ff4b480" />
+
+---
+
+3. 5pcs [5mm slotted Photo Interrupters](https://shopee.ph/IR-Infrared-Slotted-Optical-Speed-Measuring-Sensor-Detection-Optocoupler-Module-For-Motor-Test-i.280657313.6543882781?xptdk=e45657b6-eab7-4e94-b209-f3b8557e7fda)
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/7058f09d-7daf-4041-a0b5-a100e422507c" />
+
+---
+
+4. 4pcs [25mm-3.5W-12V-500rpm geared DC motors](https://shopee.ph/25mm-3.5W-DC-12V-25GA-370-Low-Speed-Metal-Gear-Motor-HG-i.1608647809.25996423159?xptdk=8b73b442-80d2-4de8-84ee-462355968faa)
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/e480f827-aa7e-467c-8811-ff7471a3a018" />
+
+---
+
+5. 4 sets of [Prusa MK3 extruder gears (or similar)](https://shopee.ph/BMG-Needle-Roller-Bearing-Gear-Set-3D-Printer-Accessories-Extruder-Material-Delivery-Silk-Stainless-Steel-Wheel-Holder-i.418282980.29485655417?xptdk=cd9329e0-f975-4a48-a71d-a3ccdf8d3131)
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/d5b1afb5-3879-4f47-93a2-4be14d516e63" />
+
+
 
 # Disclaimer
 EFAC-A1 is an **UNOFFICIAL** solution designed as a budget-friendly alternative to the Bambu Lab AMS. While it mimics **SOME** of AMS’s functions, it does so **WITHOUT** modifying printer firmware and doesn’t require AMS hardware. This is **NOT** affiliated with Bambu Lab, and users should be mindful of potential limitations. Always test thoroughly before full implementation.
