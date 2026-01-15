@@ -2,7 +2,12 @@
 
 > **NOTE**: This project is currently a **Work In Progress**. Some features are not yet implemented or require further testing. Please proceed with caution and ensure you understand the setup before implementation. 
 
-EFAC-A1 enables an **AMS-like** filament change workflow using an external feeder, without modifying the printer’s firmware or using the AMS port. This system relies on a **custom Change Filament G-code** to communicate with the external feeder, making it a software-safe alternative to AMS. It supports multi-filament setups and works seamlessly with Bambu Studio. 
+EFAC-A1 enables an **AMS-like** filament change workflow using an external feeder, without modifying the printer’s firmware or using the AMS port. This system relies on a **custom Change Filament G-code** to communicate with the external feeder, making it a software-safe alternative to AMS. It supports multi-filament setups and works seamlessly with Bambu Studio.
+
+## Acknowledgments
+
+A big thanks to [**3dnaut**](https://makerworld.com/en/models/1534741-multi-color-without-ams-with-ams-test#profileId-1609872) for providing the starting point of the custom G‑code used in EFAC‑A1.  
+This project builds on that foundation and continues to evolve through community contributions. 
 
 ## Why EFAC?
 - The Bambu Lab AMS is great, but not everyone can afford one.
