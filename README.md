@@ -1,14 +1,14 @@
 # Work In Progress (WIP) - External Feeder-Assisted Filament Change for Bambu Lab A1 (EFAC-A1)
 
-> **Note**: This project is currently a **Work In Progress**. Some features are not yet implemented or require further testing. Please proceed with caution and ensure you understand the setup before implementation.
+> **NOTE**: This project is currently a **Work In Progress**. Some features are not yet implemented or require further testing. Please proceed with caution and ensure you understand the setup before implementation. 
 
-EFAC-A1 provides AMS-like behavior using an external feeder, without using the AMS port, AMS firmware, or internal printer hardware. This system is fully software-safe, supports multi-filament setups, and works seamlessly with Bambu Studio.  
+EFAC-A1 enables an **AMS-like** filament change workflow using an external feeder, without modifying the printer’s firmware or using the AMS port. This system relies on a **custom Change Filament G-code** to communicate with the external feeder, making it a software-safe alternative to AMS. It supports multi-filament setups and works seamlessly with Bambu Studio. 
 
 ## Why EFAC?
 - The Bambu Lab AMS is great, but not everyone can afford one.
 - EFAC mimics AMS behavior using external hardware or manual swaps.
 - Firmware‑safe: uses official AMS flush logic, so slicer reports stay accurate.
-- Tested: slicer said 8.99 g, actual model & waste weighed 9.00 g → only 0.01 g difference!
+- Tested: slicer said 8.99 g, actual model & waste weighed 9.00g (only 0.01 g difference!)
 
 ## How It Works
 EFAC-A1 uses external hardware to automatically change filaments, mimicking the AMS behavior on Bambu Lab printers. It integrates seamlessly with the EFAC custom G-code and works without requiring any changes to the printer’s firmware.
@@ -19,19 +19,21 @@ EFAC-A1 uses external hardware to automatically change filaments, mimicking the 
 ### Actual: <img width="1080" height="1383" alt="image" src="https://github.com/user-attachments/assets/0e4348db-0144-410f-b911-c2487b44f231" />
 
 ## Change Filament G-codes
+> **Note:** EFAmC stands for *External Feeder‑Assisted manual Change*.  
+> It refers to the manual filament change workflow that does not require hardware.
+> 
+> **Disclaimer**: These are **NOT** official Bambu Lab G‑codes.  
+> They are community‑developed, experimental files intended for use with EFAC‑A1 hardware.
+
 ### Semi-Automatic Change Filament Gcode
-For users who want the full EFAC-A1 (external hardware required):
-[**Change Filament Gcode for EFAC-A1**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAC-A1.gcode)
+For users who want the full EFAC-A1 (external hardware required): [**Change Filament Gcode for EFAC-A1**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAC-A1.gcode)
 
 ### Manual Change Filament Gcode
-For users who prefer manual filament change (no hardware):
-[**Change Filament Gcode for EFAC-A1 - Manual**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAmC-A1.gcode)
-
-> **Disclaimer**: These are **NOT** official Bambu Lab Gcodes. These are third-party G-codes for users who want a budget-friendly alternative to the AMS.
+For users who prefer manual filament change (no hardware): [**Change Filament Gcode for EFAmC-A1**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAmC-A1.gcode)
 
 ## Features
 - **Software-Safe**: No firmware modifications required.
-- **External Feeder**: Works with an external filament feeder to replicate AMS behavior.
+- **External Feeder**: Works with an external filament feeder to enable AMS-like behavior.
 - **Multi-Filament Support**: Easily handle multiple filaments for diverse printing needs.
 - **Compatible with Bambu Studio**: Fully compatible with Bambu Studio for filament changes.
 
@@ -88,7 +90,7 @@ For Main System (Required Base, 4 Colors):
 
 ---
 
-8. 4pcs [25mm-3.5W-12V-500rpm geared DC motors](https://shopee.ph/25mm-3.5W-DC-12V-25GA-370-Low-Speed-Metal-Gear-Motor-HG-i.1608647809.25996423159?xptdk=8b73b442-80d2-4de8-84ee-462355968faa)
+8. 4pcs [GA25YN370 25mm-3.5W-12V-500rpm geared DC motors](https://shopee.ph/25mm-3.5W-DC-12V-25GA-370-Low-Speed-Metal-Gear-Motor-HG-i.1608647809.25996423159?xptdk=8b73b442-80d2-4de8-84ee-462355968faa)
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/e480f827-aa7e-467c-8811-ff7471a3a018" />
 
 ---
@@ -121,7 +123,7 @@ For Main System (Required Base, 4 Colors):
 
 ---
 
-4. 4pcs [25mm-3.5W-12V-500rpm geared DC motors](https://shopee.ph/25mm-3.5W-DC-12V-25GA-370-Low-Speed-Metal-Gear-Motor-HG-i.1608647809.25996423159?xptdk=8b73b442-80d2-4de8-84ee-462355968faa)
+4. 4pcs [GA25YN370 25mm-3.5W-12V-500rpm geared DC motors](https://shopee.ph/25mm-3.5W-DC-12V-25GA-370-Low-Speed-Metal-Gear-Motor-HG-i.1608647809.25996423159?xptdk=8b73b442-80d2-4de8-84ee-462355968faa)
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/e480f827-aa7e-467c-8811-ff7471a3a018" />
 
 ---
@@ -132,9 +134,9 @@ For Main System (Required Base, 4 Colors):
 
 
 # Disclaimer
-EFAC-A1 is an **UNOFFICIAL** solution designed as a budget-friendly alternative to the Bambu Lab AMS. While it mimics **SOME** of AMS’s functions, it does so **WITHOUT** modifying printer firmware and doesn’t require AMS hardware. This is **NOT** affiliated with Bambu Lab, and users should be mindful of potential limitations. Always test thoroughly before full implementation.
+EFAC‑A1 is an **UNOFFICIAL**, community‑driven project created to explore AMS‑style filament change behavior. While it mimics **SOME** of the AMS’s functions, it does so **WITHOUT** modifying printer firmware and doesn’t require AMS hardware. This is **NOT** affiliated with Bambu Lab, and users should be mindful of potential limitations. Always test thoroughly before full implementation.
 
-By using EFAC-A1, you acknowledge that it requires **MANUAL SETUP**, some hardware adjustments, and **CUSTOM G-codes**. As this is a **user-driven** solution, all modifications and troubleshooting are done at your own risk. Please ensure that you thoroughly understand the setup before implementation.
+By using EFAC-A1, you acknowledge that it requires **MANUAL SETUP**, some hardware & EFAC firmware adjustments, and **CUSTOM G-codes**. As this is a **user-driven** solution, all modifications and troubleshooting are done at your own risk. Please ensure that you thoroughly understand the setup before implementation.
 
 While this project aims to provide functionality similar to AMS, it **DOES NOT REPLACE** the official AMS system, and the performance may vary based on your specific setup. I’m here to help with support and troubleshooting, so feel free to reach out if you ever need some assistance!
 
