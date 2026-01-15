@@ -140,4 +140,4 @@ By using EFAC-A1, you acknowledge that it requires **MANUAL SETUP**, some hardwa
 
 While this project aims to provide functionality similar to AMS, it **DOES NOT REPLACE** the official AMS system, and the performance may vary based on your specific setup. I’m here to help with support and troubleshooting, so feel free to reach out if you ever need some assistance!
 
-Enjoy your EFAC!
+Enjoy!
