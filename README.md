@@ -60,6 +60,7 @@ For users who prefer manual filament change (no hardware): [**Change Filament Gc
 ## Hardware
 For Main System (Required Base, 4 Colors):
 > These are Shopee links
+> 
 > These are **NOT** affiliated links
 1. 2pcs [Arduino nanos](https://shopee.ph/Nano-With-the-bootloader-compatible-Nano-3.0-controller-for-arduino-CH340-USB-driver-16Mhz-Nano-v3.0-ATMEGA328P-i.580325202.15423025127?extraParams=%7B%22display_model_id%22%3A114585175768%2C%22model_selection_logic%22%3A3%7D&sp_atk=36eab4fa-2527-4574-8daa-3c7e51b4ef66&xptdk=36eab4fa-2527-4574-8daa-3c7e51b4ef66)
 <img width="444.4444444444" height="250" alt="image" src="https://github.com/user-attachments/assets/dd1ac275-4fca-4d79-b1e9-ea6a61e0cb97" />
