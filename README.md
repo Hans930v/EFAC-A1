@@ -82,7 +82,7 @@ For Main System (Required Base, 4 Colors):
 
 ---
 
-5. 1pc [KY-003 Hall Magnetic Sensor Module](https://shopee.ph/KY-003-Hall-Magnetic-Sensor-Module-i.18252381.43202189164?extraParams=%7B%22display_model_id%22%3A270180022458%2C%22model_selection_logic%22%3A3%7D&sp_atk=d9ddf631-9e96-4209-9013-42243e51732f&xptdk=d9ddf631-9e96-4209-9013-42243e51732f)
+5. 7pcs [KY-003 Hall Magnetic Sensor Module](https://shopee.ph/KY-003-Hall-Magnetic-Sensor-Module-i.18252381.43202189164?extraParams=%7B%22display_model_id%22%3A270180022458%2C%22model_selection_logic%22%3A3%7D&sp_atk=d9ddf631-9e96-4209-9013-42243e51732f&xptdk=d9ddf631-9e96-4209-9013-42243e51732f)
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/f40281a7-c027-41f1-b7db-7921bcc7d7f7" />
 
 ---
@@ -92,22 +92,17 @@ For Main System (Required Base, 4 Colors):
 
 ---
 
-7. 5pcs [5mm slotted Photo Interrupters](https://shopee.ph/IR-Infrared-Slotted-Optical-Speed-Measuring-Sensor-Detection-Optocoupler-Module-For-Motor-Test-i.280657313.6543882781?xptdk=e45657b6-eab7-4e94-b209-f3b8557e7fda)
-<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/7058f09d-7daf-4041-a0b5-a100e422507c" />
-
----
-
-8. 4pcs [GA25YN370 25mm-3.5W-12V-500rpm geared DC motors](https://shopee.ph/-Ready-Stock-25mm-DC-12V-25GA-370-Low-Speed-Metal-Gear-Motor-for-Electronic-Lock-i.156048989.2380743022?xptdk=551b820c-d232-4364-b613-f1d3787c93ca)
+7. 4pcs [GA25YN370 25mm-3.5W-12V-500rpm geared DC motors](https://shopee.ph/-Ready-Stock-25mm-DC-12V-25GA-370-Low-Speed-Metal-Gear-Motor-for-Electronic-Lock-i.156048989.2380743022?xptdk=551b820c-d232-4364-b613-f1d3787c93ca)
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/e480f827-aa7e-467c-8811-ff7471a3a018" />
 
 ---
 
-9. 4 sets of [Prusa MK3 extruder gears (or similar)](https://shopee.ph/BMG-Needle-Roller-Bearing-Gear-Set-3D-Printer-Accessories-Extruder-Material-Delivery-Silk-Stainless-Steel-Wheel-Holder-i.418282980.29485655417?xptdk=cd9329e0-f975-4a48-a71d-a3ccdf8d3131)
+8. 4 sets of [Prusa MK3 extruder gears (or similar)](https://shopee.ph/BMG-Needle-Roller-Bearing-Gear-Set-3D-Printer-Accessories-Extruder-Material-Delivery-Silk-Stainless-Steel-Wheel-Holder-i.418282980.29485655417?xptdk=cd9329e0-f975-4a48-a71d-a3ccdf8d3131)
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/d5b1afb5-3879-4f47-93a2-4be14d516e63" />
 
 ---
 
-10. 1pc [24V 3A AC‑DC power supply (100–240VAC input)](https://shopee.ph/ZJW-DC24V-Adapt-2A-3A-5A-Power-Supply-24V-LED-Power-Adaptor-i.299909911.3595544010?extraParams=%7B%22display_model_id%22%3A83704275368%2C%22model_selection_logic%22%3A3%7D&sp_atk=40caa47a-5f99-4069-a0ea-1906a6c2429b&xptdk=40caa47a-5f99-4069-a0ea-1906a6c2429b) with a 5.5mm x 2.1mm DC jack output & Polarity of Inside-Positive; Outside-Negative
+9. 1pc [24V 3A AC‑DC power supply (100–240VAC input)](https://shopee.ph/ZJW-DC24V-Adapt-2A-3A-5A-Power-Supply-24V-LED-Power-Adaptor-i.299909911.3595544010?extraParams=%7B%22display_model_id%22%3A83704275368%2C%22model_selection_logic%22%3A3%7D&sp_atk=40caa47a-5f99-4069-a0ea-1906a6c2429b&xptdk=40caa47a-5f99-4069-a0ea-1906a6c2429b) with a 5.5mm x 2.1mm DC jack output & Polarity of Inside-Positive; Outside-Negative
 
 ## Hardware for Stacking Unit (Expansion Only, adds 4+ Colors)
 > ⚠️ **Important:** The stacking unit expands the Main System by adding 4 or more filaments.  
@@ -125,8 +120,8 @@ For Main System (Required Base, 4 Colors):
 
 ---
 
-3. 5pcs [5mm slotted Photo Interrupters](https://shopee.ph/IR-Infrared-Slotted-Optical-Speed-Measuring-Sensor-Detection-Optocoupler-Module-For-Motor-Test-i.280657313.6543882781?xptdk=e45657b6-eab7-4e94-b209-f3b8557e7fda)
-<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/7058f09d-7daf-4041-a0b5-a100e422507c" />
+3. 4pcs [KY-003 Hall Magnetic Sensor Module](https://shopee.ph/KY-003-Hall-Magnetic-Sensor-Module-i.18252381.43202189164?extraParams=%7B%22display_model_id%22%3A270180022458%2C%22model_selection_logic%22%3A3%7D&sp_atk=d9ddf631-9e96-4209-9013-42243e51732f&xptdk=d9ddf631-9e96-4209-9013-42243e51732f)
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/f40281a7-c027-41f1-b7db-7921bcc7d7f7" />
 
 ---
 
