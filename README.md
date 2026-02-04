@@ -1,4 +1,4 @@
-# Work In Progress (WIP) - External Feeder-Assisted Filament Change for Bambu Lab A1 (EFAC-A1)
+# Work In Progress (WIP) - External Feeder-Assisted filament Change for Bambu Lab A1 (EFAC-A1)
 
 > **NOTE**: This project is currently a **Work In Progress**. Some features are not yet implemented or require further testing. Please proceed with caution and ensure you understand the setup before implementation. 
 
