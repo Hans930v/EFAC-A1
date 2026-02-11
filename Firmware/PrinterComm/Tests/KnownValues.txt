@@ -1,31 +1,26 @@
 Known values for VL53L0X:
-Distance: 23 mm - Toolhead at wiper position
-Distance: 43 mm
-Distance: 54 mm
-Distance: 61 mm
-Distance: 73 mm
-Distance: 82 mm
-Distance: 93 mm
-Distance: 106 mm
-Distance: 121 mm
-Distance: 137 mm
-Distance: 152 mm
-Distance: 168 mm
-Distance: 181 mm
-Distance: 198 mm
-Distance: 217 mm
-Distance: 230 mm
-Distance: 247 mm
-Distance: 257 mm
-Distance: 270 mm
-Distance: 280 mm
-Distance: 286 mm
-Distance: 292 mm
-Distance: 300 mm
-Distance: 311 mm - upto slot 23
-Distance: 312 mm - do not accept from here
-Distance: 322 mm
-Distance: 330 mm
-Distance: 335 mm
-Distance: 340 mm
-Distance: 345 mm - to here
+
+wiper pos range: <30mm
+slot 1: 40-42 
+slot2: 52-54 
+slot3: 62-64 
+slot4: 72-74 
+slot5: 80-82 
+slot6: 92-94 
+slot7: 104-106 
+slot8: 118-120 
+slot9: 136-138 (big jump)
+slot10: 149-151 
+slot11: 164-166 
+slot12: 179-181 
+slot13: 195-197 
+slot14: 214-216 
+slot15: 228-230 (big jump) 
+slot16: 246-248 
+slot17: 256-258 
+slot18: 267-269 
+slot19: 274-276 
+slot20: 286-287 
+slot21: 294-297 
+slot22: 300-302 (21 and 22 are super close) 
+slot23: 311-313 (max)
