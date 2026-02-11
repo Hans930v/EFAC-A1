@@ -1,4 +1,4 @@
-Known values for VL53L0X:
+Known tested values for VL53L0X:
 
 wiper pos range: <30mm
 slot 1: 40-42 
