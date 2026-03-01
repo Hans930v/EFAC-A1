@@ -1,4 +1,4 @@
-/*  
+/*
   EFAC-A1-Feeder Firmware
   ----------------------------------------
   This code runs on the Arduino Nano that supervises
@@ -118,6 +118,7 @@ void setup() {
   }
 
   reportPresence();
+  detectActiveSlotAtStartup();
 }
 
 // --- Loop ---
@@ -275,75 +276,46 @@ void disengageGear(int slot) {
   delay(2000);
 }
 
+enum UnloadState {
+  UNLOAD_PULL,
+  UNLOAD_PUSH_BACK,
+  UNLOAD_STOP
+};
+
+UnloadState unloadState = UNLOAD_PULL;
+
 void controlSlotOutput(int slot, bool load) {
   int mcpIndex   = slotToMcp(slot);
   int motorIndex = slotToMotorIndex(slot);
 
-  Serial.print(load ? "LOAD " : "UNLOAD ");
-  Serial.print("slot ");
-  Serial.print(slot);
-  Serial.print(" -> MCP #");
-  Serial.print(mcpIndex + 1);
-  Serial.print(", motor ");
-  Serial.println(motorIndex + 1);
+  bool collectorEmpty = (digitalRead(clctr) == HIGH);
+  bool slotEmpty      = (mcps[mcpIndex].digitalRead(sensorPins[motorIndex]) == HIGH);
 
-  // --- Failsafe checks with collector ---
-  if (load) {
-    // Only load if filament is present at this slot
-    if (!slotPresent[slot - 1]) {
-      Serial.print("F"); Serial.print(slot); Serial.println("_EMPTY1");
-      return;
-    }
-
-    unsigned long start = millis();
-    // Push until collector goes LOW (filament arrives)
-    while (digitalRead(clctr) == HIGH) {
-      push(mcpIndex, motorIndex);
-      if (millis() - start > 5000) { // timeout
-        Serial.println("FAILSAFE: Load timeout.");
-        break;
+  switch (unloadState) {
+    case UNLOAD_PULL:
+      // pull until both sensors empty
+      if (collectorEmpty && slotEmpty) {
+        unloadState = UNLOAD_PUSH_BACK;
+      } else {
+        pull(mcpIndex, motorIndex);
       }
-    }
+      break;
 
-    // Verify both slot sensor AND collector confirm load
-    bool slotOk   = (mcps[mcpIndex].digitalRead(sensorPins[motorIndex]) == LOW);
-    bool clctrOk  = (digitalRead(clctr) == LOW); // filament at collector
-
-    if (slotOk && clctrOk) {
-      activeSlot = slot;
-      Serial.print("LOADED_F"); Serial.println(slot);
-    } else {
-      Serial.print("F"); Serial.print(slot); Serial.println("_LOAD_FAIL");
-    }
-
-
-    unsigned long start = millis();
-    // Pull until collector AND slot sensor both active
-    while (!(digitalRead(clctr) == HIGH &&
-             mcps[mcpIndex].digitalRead(sensorPins[motorIndex]) == LOW)) {
-      pull(mcpIndex, motorIndex);
-      if (millis() - start > 5000) {
-        Serial.println("FAILSAFE: Unload timeout.");
-        break;
+    case UNLOAD_PUSH_BACK:
+      // Step 2: push until slot sensor sees filament again
+      if (!slotEmpty) {
+        unloadState = UNLOAD_STOP;
+      } else {
+        push(mcpIndex, motorIndex);
       }
-    }
+      break;
 
-    // Push until slot sensor goes HIGH (empty)
-    start = millis();
-    while (mcps[mcpIndex].digitalRead(sensorPins[motorIndex]) == LOW) {
-      push(mcpIndex, motorIndex);
-      if (millis() - start > 5000) {
-        Serial.println("FAILSAFE: Push timeout.");
-        break;
-      }
-    }
-
-    if (mcps[mcpIndex].digitalRead(sensorPins[motorIndex]) == HIGH) {
-      if (activeSlot == slot) activeSlot = -1;
+    case UNLOAD_STOP:
+      // Step 3: stop motor, mark slot unloaded
       Serial.print("UNLOADED_F"); Serial.println(slot);
-    } else {
-      Serial.print("F"); Serial.print(slot); Serial.println("_EMPTY4");
-    }
+      activeSlot = -1;
+      unloadState = UNLOAD_PULL; // reset for next cycle
+      break;
   }
 }
 
@@ -395,4 +367,26 @@ void pull(int mcpIndex, int motorIndex) {
   mcps[mcpIndex].digitalWrite(pin1, LOW);
   mcps[mcpIndex].digitalWrite(pin2, LOW);
   mcps[mcpIndex].digitalWrite(STBY_1, LOW);   // disable motor driver
+}
+
+// Detect which slot is actually at the collector at startup
+void detectActiveSlotAtStartup() {
+  if (digitalRead(clctr) == LOW) { // LOW = filament present at collector
+    // Find which slot sensor also reports PRESENT
+    for (int i = 0; i < activeCount * 4; i++) {
+      if (slotPresent[i]) {
+        activeSlot = i + 1; // slot numbers are 1-based
+        Serial.print("Startup: Collector confirms filament from slot ");
+        Serial.println(activeSlot);
+        return;
+      }
+    }
+    // Collector sees filament but no slot sensor matched
+    activeSlot = -1;
+    Serial.println("Startup: Collector has filament, but slot unknown.");
+  } else {
+    // Collector is empty
+    activeSlot = -1;
+    Serial.println("Startup: No filament at collector.");
+  }
 }
