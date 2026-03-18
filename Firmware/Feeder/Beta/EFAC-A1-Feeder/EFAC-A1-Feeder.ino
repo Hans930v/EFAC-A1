@@ -5,25 +5,25 @@
 
 // --- Pin definitions ---
 #ifdef ORIGINAL_PINS
-#define AIN2_1 0
-#define AIN1_1 1
-#define BIN1_2 2
-#define BIN2_2 3
-#define AIN2_3 4
-#define AIN1_3 5
-#define STBY_1 6
-#define BIN1_4 7
-#define BIN2_4 15
+#define AIN2_1 0   // A0
+#define AIN1_1 1   // A1
+#define BIN1_2 2   // A2
+#define BIN2_2 3   // A3
+#define AIN2_3 4   // A4
+#define AIN1_3 5   // A5
+#define STBY_1 6   // A6
+#define BIN1_4 7   // A7
+#define BIN2_4 15  // B7
 #else
-#define AIN2_1 15
-#define AIN1_1 7
-#define BIN1_2 5
-#define BIN2_2 4
-#define AIN2_3 3
-#define AIN1_3 2
-#define STBY_1 6
-#define BIN1_4 1
-#define BIN2_4 0
+#define AIN2_1 15  // B7
+#define AIN1_1 7   // A7
+#define BIN1_2 5   // A5
+#define BIN2_2 4   // A4
+#define AIN2_3 3   // A3
+#define AIN1_3 2   // A2
+#define STBY_1 6   // A6
+#define BIN1_4 1   // A1
+#define BIN2_4 0   // A0
 #endif
 
 #define f1 14
