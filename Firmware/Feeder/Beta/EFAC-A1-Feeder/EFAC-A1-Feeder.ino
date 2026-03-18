@@ -1,349 +1,290 @@
-// EFAC-A1-Feeder Firmware
-// Controled Tests
-// Unfinished
-
-// EXPERIMENTAL
+// EFAC-A1-Feeder Firmware - State Machine Version
+// unfinished
 #include <Adafruit_MCP23X17.h>
 #include <Wire.h>
 
-/*
-// --- Pin definitions (per MCP23017) ---
-#define AIN2_1 0   // A0
-#define AIN1_1 1   // A1
-#define BIN1_2 2   // A2
-#define BIN2_2 3   // A3
-#define AIN2_3 4   // A4
-#define AIN1_3 5   // A5
-#define STBY_1 6   // A6
-#define BIN1_4 7   // A7
-#define BIN2_4 15  // B7
-*/
+// --- Pin definitions ---
+#ifdef ORIGINAL_PINS
+#define AIN2_1 0
+#define AIN1_1 1
+#define BIN1_2 2
+#define BIN2_2 3
+#define AIN2_3 4
+#define AIN1_3 5
+#define STBY_1 6
+#define BIN1_4 7
+#define BIN2_4 15
+#else
+#define AIN2_1 15
+#define AIN1_1 7
+#define BIN1_2 5
+#define BIN2_2 4
+#define AIN2_3 3
+#define AIN1_3 2
+#define STBY_1 6
+#define BIN1_4 1
+#define BIN2_4 0
+#endif
 
-#define AIN2_1 15  // B7
-#define AIN1_1 7   // A7
-#define BIN1_2 5   // A5
-#define BIN2_2 4   // A4
-#define AIN2_3 3   // A3
-#define AIN1_3 2   // A2
-#define STBY_1 6   // A6
-#define BIN1_4 1   // A1
-#define BIN2_4 0   // A0
+#define f1 14
+#define f2 13
+#define f3 12
+#define f4 11
+#define clctr A0
 
-// --- Sensors ---
-#define f1 14  // B6
-#define f2 13  // B5
-#define f3 12  // B4
-#define f4 11  // B3
-
-const uint8_t motorPins[] = {
-  AIN2_1, AIN1_1,
-  BIN1_2, BIN2_2,
-  AIN2_3, AIN1_3,
-  BIN1_4, BIN2_4,
-  STBY_1
-};
+const uint8_t motorPins[] = { AIN2_1, AIN1_1, BIN1_2, BIN2_2, AIN2_3, AIN1_3, BIN1_4, BIN2_4, STBY_1 };
 const uint8_t sensorPins[] = { f1, f2, f3, f4 };
 
-uint8_t motor_step = 0;
+Adafruit_MCP23X17 mcps[8];
+bool slotPresent[32];
+bool lastReported[32];
+int activeSlot = 1; // assumes slot 1 at start
+uint8_t activeCount = 0;
 
+// --- State Machine ---
+enum SystemPhase { IDLE, UNLOAD, PUSHBACK, LOAD, FULL_UNLOAD };
+SystemPhase currentPhase = IDLE;
+int targetSlot = -1;
+unsigned long sensorStart = 0;
+const unsigned long sensorInterval = 100;
 
-// --- Globals ---
-Adafruit_MCP23X17 mcps[8];  // max of 8 expanders
-bool slotPresent[32];       // up to 8 MCPs × 4 slots
-bool lastReported[32];      // last state printed
-int activeSlot = 1;         // 1 means slot 1 loaded
-uint8_t activeCount = 0;    // how many MCPs detected
-unsigned long sensorTimer = 0;
-
-// --- Utility ---
-bool delayMillis(unsigned long &lastTime, unsigned long ms) {
-  unsigned long now = millis();
-  if (now - lastTime >= ms) {
-    lastTime = now;
-    return true;
+int detectCurrentSlot() {
+  for (int i = 0; i < activeCount * 4; i++) {
+    if (slotPresent[i]) return i + 1;
   }
-  return false;
+  return -1;
 }
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin();
+  pinMode(clctr, INPUT);
+
+  for (uint8_t addr = 0x20; addr <= 0x27; addr++) {
+    if (activeCount < 8 && mcps[activeCount].begin_I2C(addr)) {
+      setupPins(mcps[activeCount]);
+      activeCount++;
+    }
+  }
+  Serial.println("Feeder Ready.");
+
+  activeSlot = detectCurrentSlot();
+  if (activeSlot > 0) {
+    Serial.print("Active slot at startup: ");
+    Serial.println(activeSlot);
+  } else {
+    Serial.println("No active slot at startup.");
+  }
+
+}
+
+void loop() {
+  unsigned long now = millis();
+
+  // Periodic sensor scan
+  if (now - sensorStart >= sensorInterval) {
+    for (uint8_t i = 0; i < activeCount; i++) scanPresenceMcp(i);
+    sensorStart = now;
+  }
+
+  // Handle Commands
+  if (Serial.available()) {
+    String cmd = Serial.readStringUntil('\n');
+    cmd.trim();
+
+    if (cmd.startsWith("LOAD_F")) {
+      targetSlot = cmd.substring(6).toInt();
+
+      // Refresh activeSlot if unknown
+      if (activeSlot < 1) activeSlot = detectCurrentSlot();
+
+      // If requested slot already active, do nothing
+      if (activeSlot == targetSlot) {
+        Serial.print("Slot ");
+        Serial.print(targetSlot);
+        Serial.println(" already active. No action taken.");
+        targetSlot = -1;
+        currentPhase = IDLE;
+      } else {
+        // If there is an active slot different from target, unload it first
+        if (activeSlot > 0) {
+          Serial.print("LOAD_F");
+          Serial.print(targetSlot);
+          Serial.println(": unloading current slot first.");
+          currentPhase = UNLOAD;
+        } else {
+          Serial.print("LOAD_F");
+          Serial.print(targetSlot);
+          Serial.println(": no active slot, starting load.");
+          currentPhase = LOAD;
+        }
+      }
+    } else if (cmd == "UNLOAD") {
+      // Refresh activeSlot if unknown
+      if (activeSlot < 1) activeSlot = detectCurrentSlot();
+
+      if (activeSlot > 0) {
+        targetSlot = -1; // No new slot to load after
+        Serial.print("UNLOAD: will unload slot ");
+        Serial.println(activeSlot);
+        currentPhase = UNLOAD;
+      } else {
+        Serial.println("UNLOAD: no filament detected to unload.");
+      }
+    } else if (cmd == "FULL_UNLOAD") {
+      if (activeSlot < 1) activeSlot = detectCurrentSlot();
+
+      if (activeSlot > 0) {
+        targetSlot = -1; // No new slot to load after
+        Serial.print("FULL_UNLOAD: will unload slot ");
+        Serial.println(activeSlot);
+        currentPhase = FULL_UNLOAD;
+      } else {
+        Serial.println("FULL_UNLOAD: no filament detected to unload.");
+      }
+    }
+  }
+
+  runMotorStateMachine();
+}
+
+void runMotorStateMachine() {
+  if (currentPhase == IDLE) return;
+
+  // Identify which slot/motor we are currently talking to
+  int operationalSlot = (currentPhase == LOAD) ? targetSlot : activeSlot;
+  if (operationalSlot < 1) {
+    currentPhase = IDLE;
+    return;
+  }
+
+  uint8_t mcpIdx = slotToMcp(operationalSlot);
+  uint8_t motIdx = slotToMotorIndex(operationalSlot);
+
+  // Real-time sensor reads (Non-blocking)
+  int sLocal = mcps[mcpIdx].digitalRead(sensorPins[motIdx]);
+  int sClctr = digitalRead(clctr);
+
+  switch (currentPhase) {
+    case UNLOAD:
+      // Pull until both sensors are HIGH (Filament is clear of the path)
+      if (sLocal == HIGH && sClctr == HIGH) {
+        stop(mcpIdx, motIdx);
+        currentPhase = PUSHBACK;
+        Serial.print("Unloaded_F");
+        Serial.println(activeSlot);
+      } else {
+        pull(mcpIdx, motIdx);
+      }
+      break;
+
+    case PUSHBACK:
+      // Push back until local sensor is LOW (Filament parked) and clctr is HIGH (Path clear)
+      if (sLocal == LOW && sClctr == HIGH) {
+        stop(mcpIdx, motIdx);
+        activeSlot = -1;
+        if (targetSlot != -1) {
+          currentPhase = LOAD;
+        } else {
+          currentPhase = IDLE;
+          Serial.print("Unloaded_F");
+          Serial.println(activeSlot);
+        }
+      } else {
+        push(mcpIdx, motIdx);
+        Serial.println("Starting Pushback");
+      }
+      break;
+
+    case LOAD:
+      // Push until both sensors are LOW (Filament fully loaded)
+      if (sLocal == LOW && sClctr == LOW) {
+        stop(mcpIdx, motIdx);
+        activeSlot = targetSlot;
+        targetSlot = -1;
+        currentPhase = IDLE;
+        Serial.print("LOADED_F");
+        Serial.println(activeSlot);
+      } else {
+        push(mcpIdx, motIdx);
+      }
+      break;
+
+    case FULL_UNLOAD:
+      if (sLocal == HIGH && sClctr == HIGH) {
+        stop(mcpIdx, motIdx);
+        Serial.print("Unload_F");
+        Serial.println(activeSlot);
+      } else {
+        pull(mcpIdx, motIdx);
+      }
+      break;
+  }
+}
+
+// --- Helper Functions ---
 
 void setupPins(Adafruit_MCP23X17 &expander) {
   for (uint8_t pin : motorPins) {
     expander.pinMode(pin, OUTPUT);
     expander.digitalWrite(pin, LOW);
   }
-  for (uint8_t pin : sensorPins) {
-    expander.pinMode(pin, INPUT);
+  for (uint8_t pin : sensorPins) expander.pinMode(pin, INPUT);
+}
+
+void push(uint8_t mcpIndex, uint8_t motorIndex) {
+  uint8_t p1, p2; getMotorPins(motorIndex, p1, p2);
+  mcps[mcpIndex].digitalWrite(STBY_1, HIGH);
+  mcps[mcpIndex].digitalWrite(p1, HIGH);
+  mcps[mcpIndex].digitalWrite(p2, LOW);
+}
+
+void pull(uint8_t mcpIndex, uint8_t motorIndex) {
+  uint8_t p1, p2; getMotorPins(motorIndex, p1, p2);
+  mcps[mcpIndex].digitalWrite(STBY_1, HIGH);
+  mcps[mcpIndex].digitalWrite(p1, LOW);
+  mcps[mcpIndex].digitalWrite(p2, HIGH);
+}
+
+void stop(uint8_t mcpIndex, uint8_t motorIndex) {
+  uint8_t p1, p2; getMotorPins(motorIndex, p1, p2);
+  mcps[mcpIndex].digitalWrite(p1, LOW);
+  mcps[mcpIndex].digitalWrite(p2, LOW);
+  mcps[mcpIndex].digitalWrite(STBY_1, LOW);
+}
+
+void getMotorPins(uint8_t motorIndex, uint8_t &pin1, uint8_t &pin2) {
+  switch (motorIndex) {
+    case 0: pin1 = AIN1_1; pin2 = AIN2_1; break;
+    case 1: pin1 = BIN1_2; pin2 = BIN2_2; break;
+    case 2: pin1 = AIN1_3; pin2 = AIN2_3; break;
+    case 3: pin1 = BIN1_4; pin2 = BIN2_4; break;
   }
 }
 
-// --- Setup ---
-void setup() {
-  Serial.begin(115200);
-  Wire.begin();
-
-  // Scan MCPs
-  for (uint8_t addr = 0x20; addr <= 0x27; addr++) {
-    if (activeCount < 8 && mcps[activeCount].begin_I2C(addr)) {
-      Serial.print("MCP23017 detected at 0x");
-      Serial.println(addr, HEX);
-      setupPins(mcps[activeCount]);
-      activeCount++;
-    }
-  }
-
-  Serial.print("Total MCPs detected: ");
-  Serial.println(activeCount);
-
-  // Startup presence scan
-  for (int mcpIndex = 0; mcpIndex < activeCount; mcpIndex++) {
-    engageMcpGears(mcpIndex);
-    scanPresenceMcp(mcpIndex);
-    disengageMcpGears(mcpIndex);
-  }
-
-  reportPresence();
+uint8_t slotToMcp(int slot) {
+  return (slot - 1) / 4;
+}
+uint8_t slotToMotorIndex(int slot) {
+  return (slot - 1) % 4;
 }
 
-// --- Loop ---
-void loop() {
-  if (delayMillis(sensorTimer, 100)) {
-    for (int mcpIndex = 0; mcpIndex < activeCount; mcpIndex++) {
-      scanPresenceMcp(mcpIndex);
-    }
-  }
-
-  // Handle incoming commands
-  if (Serial.available()) {
-    String cmd = Serial.readStringUntil('\n');
-    cmd.trim();
-    handleCommand(cmd);
-  }
-}
-
-// --- Command handling ---
-void handleCommand(String cmd) {
-  if (cmd.startsWith("LOAD_F")) {
-    int targetSlot = cmd.substring(6).toInt();
-
-    if (activeSlot > 0) {
-      controlSlotOutput(activeSlot, false);  // unload current slot
-    } else {
-      Serial.println("No active filament to unload.");
-    }
-
-    controlSlotOutput(targetSlot, true);  // load requested slot
-  } else if (cmd == "UNLOAD") {
-    if (activeSlot > 0) {
-      controlSlotOutput(activeSlot, false);
-    } else {
-      Serial.println("No filament detected to unload.");
-    }
-  }
-}
-
-// --- Presence scan ---
-void scanPresenceMcp(int mcpIndex) {
+void scanPresenceMcp(uint8_t mcpIndex) {
   for (int slot = 0; slot < 4; slot++) {
-    int globalSlot = mcpIndex * 4 + slot;
-    int sensorVal = mcps[mcpIndex].digitalRead(sensorPins[slot]);
-    bool present = (sensorVal == LOW);  // LOW = filament present
-
+    uint8_t globalSlot = mcpIndex * 4 + slot;
+    bool present = (mcps[mcpIndex].digitalRead(sensorPins[slot]) == LOW);
     slotPresent[globalSlot] = present;
-
     if (slotPresent[globalSlot] != lastReported[globalSlot]) {
       lastReported[globalSlot] = slotPresent[globalSlot];
-      Serial.print("Slot ");
-      Serial.print(globalSlot + 1);
-      Serial.print(" (MCP #");
-      Serial.print(mcpIndex + 1);
-      Serial.print(", local slot ");
-      Serial.print(slot + 1);
-      Serial.print("): ");
-      Serial.println(present ? "PRESENT" : "EMPTY");
+      Serial.print("Slot "); Serial.print(globalSlot + 1);
+      Serial.println(present ? ": PRESENT" : ": EMPTY");
     }
   }
 }
 
 void reportPresence() {
-  Serial.println("Slot presence table:");
-  for (int i = 0; i < activeCount * 4; i++) {
-    int mcpIndex = slotToMcp(i + 1);
-    int localSlot = slotToMotorIndex(i + 1) + 1;
-    Serial.print("Slot ");
-    Serial.print(i + 1);
-    Serial.print(" (MCP #");
-    Serial.print(mcpIndex + 1);
-    Serial.print(", local slot ");
-    Serial.print("): ");
-    Serial.println(slotPresent[i] ? "PRESENT" : "EMPTY");
+  for (uint8_t i = 0; i < activeCount * 4; i++) {
+    Serial.print("Slot "); Serial.print(i + 1);
+    Serial.println(slotPresent[i] ? ": PRESENT" : ": EMPTY");
   }
-}
-
-// --- Gear engagement placeholders ---
-void engageMcpGears(int mcpIndex) {
-  Serial.print("Engaging gears for MCP #");
-  Serial.println(mcpIndex + 1);
-}
-void disengageMcpGears(int mcpIndex) {
-  Serial.print("Disengaging gears for MCP #");
-  Serial.println(mcpIndex + 1);
-}
-
-// --- Slot mapping ---
-int slotToMcp(int slot) {
-  return (slot - 1) / 4;
-}
-int slotToMotorIndex(int slot) {
-  return (slot - 1) % 4;
-}
-
-// --- High-level slot routines ---
-void loadSlot(int slot) {
-  int mcpIndex = slotToMcp(slot);
-  int motorIndex = slotToMotorIndex(slot);
-  engageGear(slot);
-  push(mcpIndex, motorIndex);
-  disengageGear(slot);
-  slotPresent[slot - 1] = true;
-  Serial.print("LOAD complete for slot ");
-  Serial.println(slot);
-}
-
-void unloadSlot(int slot) {
-  int mcpIndex = slotToMcp(slot);
-  int motorIndex = slotToMotorIndex(slot);
-  engageGear(slot);
-  pull(mcpIndex, motorIndex);
-  disengageGear(slot);
-  slotPresent[slot - 1] = false;
-  Serial.print("UNLOAD complete for slot ");
-  Serial.println(slot);
-}
-
-int detectCurrentSlot() {
-  for (int i = 0; i < activeCount * 4; i++) {
-    if (slotPresent[i]) {
-      return i + 1;  // slot numbers are 1-based
-    }
-  }
-  return -1;  // no slot detected
-}
-
-void unloadCurrent() {
-  int slot = detectCurrentSlot();
-  if (slot > 0) unloadSlot(slot);
-  else Serial.println("No filament detected to unload.");
-}
-
-// --- Gear engagement per slot ---
-void engageGear(int slot) {
-  Serial.print("Engaging gear for slot ");
-  Serial.println(slot);
-}
-void disengageGear(int slot) {
-  Serial.print("Disengaging gear for slot ");
-  Serial.println(slot);
-}
-
-// --- Simplified slot-only control ---
-enum SlotAction {
-  LOAD_ACTION,
-  UNLOAD_ACTION
-};
-void controlSlotOutput(int slot, bool load) {
-  int mcpIndex   = slotToMcp(slot);
-  int motorIndex = slotToMotorIndex(slot);
-
-  bool slotEmpty = (mcps[mcpIndex].digitalRead(sensorPins[motorIndex]) == HIGH);
-
-  SlotAction action = load ? LOAD_ACTION : UNLOAD_ACTION;
-
-  switch (action) {
-    case LOAD_ACTION:
-      if (!slotEmpty) {
-        push(mcpIndex, motorIndex);
-        activeSlot = slot;
-        Serial.print("LOADED_F");
-        Serial.println(slot);
-      } else {
-        Serial.print("F");
-        Serial.print(slot);
-        Serial.println("_EMPTY1");
-      }
-      break;
-
-    case UNLOAD_ACTION:
-      if (!slotEmpty) {
-        pull(mcpIndex, motorIndex);
-        activeSlot = -1;
-        Serial.print("UNLOADED_F");
-        Serial.println(slot);
-      } else {
-        Serial.print("F");
-        Serial.print(slot);
-        Serial.println("_EMPTY2");
-      }
-      break;
-  }
-}
-
-// --- Motor controls ---
-void getMotorPins(int motorIndex, uint8_t &pin1, uint8_t &pin2) {
-  switch (motorIndex) {
-    case 0:
-      pin1 = AIN1_1;
-      pin2 = AIN2_1;
-      break;
-    case 1:
-      pin1 = BIN1_2;
-      pin2 = BIN2_2;
-      break;
-    case 2:
-      pin1 = AIN1_3;
-      pin2 = AIN2_3;
-      break;
-    case 3:
-      pin1 = BIN1_4;
-      pin2 = BIN2_4;
-      break;
-  }
-}
-
-void push(int mcpIndex, int motorIndex) {
-  mcps[mcpIndex].digitalWrite(STBY_1, HIGH);  // enable motor driver
-  uint8_t pin1, pin2;
-  getMotorPins(motorIndex, pin1, pin2);
-
-  Serial.print("PUSH slot ");
-  Serial.println(mcpIndex * 4 + motorIndex + 1);
-
-  // Forward direction: pin1 HIGH, pin2 LOW
-  mcps[mcpIndex].digitalWrite(pin1, HIGH);
-  mcps[mcpIndex].digitalWrite(pin2, LOW);
-
-  delay(2000);  // run motor for 2s
-
-  // Stop motor
-  mcps[mcpIndex].digitalWrite(pin1, LOW);
-  mcps[mcpIndex].digitalWrite(pin2, LOW);
-  mcps[mcpIndex].digitalWrite(STBY_1, LOW);  // disable motor driver
-}
-
-void pull(int mcpIndex, int motorIndex) {
-  mcps[mcpIndex].digitalWrite(STBY_1, HIGH);  // enable motor driver
-  uint8_t pin1, pin2;
-  getMotorPins(motorIndex, pin1, pin2);
-
-  Serial.print("PULL slot ");
-  Serial.println(mcpIndex * 4 + motorIndex + 1);
-
-  // Reverse direction: pin1 LOW, pin2 HIGH
-  mcps[mcpIndex].digitalWrite(pin1, LOW);
-  mcps[mcpIndex].digitalWrite(pin2, HIGH);
-
-  delay(2000);  // run motor for 2s
-
-  // Stop motor
-  mcps[mcpIndex].digitalWrite(pin1, LOW);
-  mcps[mcpIndex].digitalWrite(pin2, LOW);
-  mcps[mcpIndex].digitalWrite(STBY_1, LOW);  // disable motor driver
 }
