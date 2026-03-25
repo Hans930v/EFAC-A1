@@ -109,7 +109,7 @@ For Main System (Required Base, 4 Colors):
 
 ## Hardware for Stacking Unit (Expansion Only, adds 4+ Colors)
 > ⚠️ **Important:** The stacking unit expands the Main System by adding 4 or more filaments.  
-> It **cannot function alone** — it does not include its own Arduino Nanos, buck converters, or power supply.  
+> It **cannot function alone** — it does not include its own Microcontrollers, buck converters, or power supply.  
 > Think of it as a “module” that plugs into the base system.
 
 
