@@ -35,7 +35,7 @@ EFAC-A1 uses external hardware to automatically change filaments, mimicking the 
 ### Semi-Automatic Change Filament Gcode
 For users who want the full EFAC-A1 (external hardware required): [**Change Filament Gcode for EFAC-A1**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAC-A1.gcode)
 
-### Manual Change Filament Gcode
+### Manual Change Filament Gcode (obsolete)
 For users who prefer manual filament change (no hardware): [**Change Filament Gcode for EFAmC-A1**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAmC-A1.gcode)
 
 ## Features
