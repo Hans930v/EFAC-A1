@@ -17,6 +17,19 @@ This project builds on those foundations and continues to evolve through communi
 - Firmware‑safe: uses official AMS flush logic, so slicer reports stay accurate.
 - Tested: slicer said 8.99 g, actual model & waste weighed 9.00g (only 0.01 g difference!)
 
+## Status & Roadmap
+> G-code is finalized and working. Hardware and firmware are still being validated.
+> Version will bump to 1.0.0 once hardware testing is complete.
+
+| Milestone | Status |
+|---|---|
+| G-code logic | Final (v0.9.7) |
+| Firmware (PrinterComms + Feeder) | In Progress |
+| Hardware design | In Progress |
+| Schematics | In Progress |
+| Real hardware validation | In Progress |
+| 1.0.0 release | Pending |
+
 ## How It Works
 EFAC-A1 uses external hardware to automatically change filaments, mimicking the AMS behavior on Bambu Lab printers. It integrates seamlessly with the EFAC custom G-code and works without requiring any changes to the printer’s firmware.
 
