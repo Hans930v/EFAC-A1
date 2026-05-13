@@ -149,7 +149,7 @@ For Main System (Required Base, 4 Colors):
 5. 4 sets of [Prusa MK3 extruder gears (or similar)](https://shopee.ph/BMG-Needle-Roller-Bearing-Gear-Set-3D-Printer-Accessories-Extruder-Material-Delivery-Silk-Stainless-Steel-Wheel-Holder-i.418282980.29485655417?xptdk=cd9329e0-f975-4a48-a71d-a3ccdf8d3131)
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/d5b1afb5-3879-4f47-93a2-4be14d516e63" />
 
-
+---
 
 # Disclaimer
 EFAC‑A1 is an **UNOFFICIAL**, community‑driven project and is **NOT** affiliated with Bambu Lab. It does **NOT** replace the official AMS — think of it as a community-built companion for those who want multi-color printing without the AMS price tag.
