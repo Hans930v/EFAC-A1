@@ -14,8 +14,9 @@ This project builds on those foundations and continues to evolve through communi
 ## Why EFAC?
 - The Bambu Lab AMS is great, but not everyone can afford one.
 - EFAC mimics AMS behavior using external hardware or manual swaps.
-- Firmware‑safe: uses official AMS flush logic, so slicer reports stay accurate.
-- Tested: slicer said 8.99 g, actual model & waste weighed 9.00g (only 0.01 g difference!)
+- **Firmware‑safe**: uses official AMS flush logic, so slicer reports stay accurate.
+- **Tested**: slicer said 8.99 g, actual model & waste weighed 9.00g (only 0.01 g difference!)
+- **Scalable**: Base unit supports 4 colors, expandable in sets of 4 via stacking units — currently supports up to 16 colors, with a theoretical maximum of 32.
 
 ## Status & Roadmap
 > G-code is finalized and working. Hardware and firmware are still being validated.
