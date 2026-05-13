@@ -77,9 +77,8 @@ For Main System (Required Base, 4 Colors):
 > These are Shopee links
 > 
 > These are **NOT** affiliated links
-1. 1pc [ESP-WROOM-32 Dev Board](https://shopee.ph/ESP-32S-ESP-WROOM-32-ESP32-ESP-32-Bluetooth-and-WIFI-Dual-Core-CPU-with-Low-Power-Consumption-MCU-ESP-32-i.580325202.14223060123?extraParams=%7B%22display_model_id%22%3A205898479536%2C%22model_selection_logic%22%3A3%7D&sp_atk=1422cb7e-eaa5-4612-af6a-bb72555c5edd&xptdk=1422cb7e-eaa5-4612-af6a-bb72555c5edd)
-<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/bbf280dc-332c-4d23-902a-e2a3f4048574" />
-
+1. 1pc [ESP32-S3-DevKitC-1-N16R8](https://shopee.ph/ESP32-ESP32-C3-AI-C3-ESP32-C3-DevKitM-1-ESP32-C3-MINI-1-AI-S3-ESP32-S3-N16R8-ESP32-S3-DevKit-C-Dual-Type-C-USB-development-board-i.580325202.17482300486?xptdk=b006dd07-0082-4748-a97c-4e4ec1c7e9a6)
+<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/5e29dcf9-bb5c-4e46-bde9-63691e41bb7b" />
 
 ---
 
@@ -98,7 +97,7 @@ For Main System (Required Base, 4 Colors):
 
 ---
 
-5. 7pcs [KY-003 Hall Magnetic Sensor Module](https://shopee.ph/KY-003-Hall-Magnetic-Sensor-Module-i.18252381.43202189164?extraParams=%7B%22display_model_id%22%3A270180022458%2C%22model_selection_logic%22%3A3%7D&sp_atk=d9ddf631-9e96-4209-9013-42243e51732f&xptdk=d9ddf631-9e96-4209-9013-42243e51732f)
+5. 5pcs [KY-003 Hall Magnetic Sensor Module](https://shopee.ph/KY-003-Hall-Magnetic-Sensor-Module-i.18252381.43202189164?extraParams=%7B%22display_model_id%22%3A270180022458%2C%22model_selection_logic%22%3A3%7D&sp_atk=d9ddf631-9e96-4209-9013-42243e51732f&xptdk=d9ddf631-9e96-4209-9013-42243e51732f)
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/f40281a7-c027-41f1-b7db-7921bcc7d7f7" />
 
 ---
@@ -152,10 +151,10 @@ For Main System (Required Base, 4 Colors):
 
 
 # Disclaimer
-EFAC‑A1 is an **UNOFFICIAL**, community‑driven project created to explore AMS‑style filament change behavior. While it mimics **SOME** of the AMS’s functions, it does so **WITHOUT** modifying printer firmware and doesn’t require AMS hardware. This is **NOT** affiliated with Bambu Lab, and users should be mindful of potential limitations. Always test thoroughly before full implementation.
+EFAC‑A1 is an **UNOFFICIAL**, community‑driven project and is **NOT** affiliated with Bambu Lab. It does **NOT** replace the official AMS — think of it as a community-built companion for those who want multi-color printing without the AMS price tag.
 
-By using EFAC-A1, you acknowledge that it requires **MANUAL SETUP**, some hardware & EFAC firmware adjustments, and **CUSTOM G-codes**. As this is a **user-driven** solution, all modifications and troubleshooting are done at your own risk. Please ensure that you thoroughly understand the setup before implementation.
+That said, this is a **user-driven** solution that requires **MANUAL SETUP**, hardware assembly, EFAC firmware, and **CUSTOM G-codes** — so please read through everything before diving in, and test thoroughly before relying on it for real prints. All modifications are done at your own risk.
 
-While this project aims to provide functionality similar to AMS, it **DOES NOT REPLACE** the official AMS system, and the performance may vary based on your specific setup. I’m here to help with support and troubleshooting, so feel free to reach out if you ever need some assistance!
+If you run into issues or have questions, feel free to open a GitHub Issue — happy to help where I can. 
 
-Enjoy!
+Enjoy building!
