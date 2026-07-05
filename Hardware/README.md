@@ -1,39 +1,24 @@
-# EFAC-A1 Hardware
+# Hardware
 
-> ⚠️ **Work In Progress** — Hardware files will be published here upon the official v1.0.0 release.
+This folder will contain the **hardware design files** for the EFAC‑A1 project.  
+It will include reference layouts, wiring diagrams, and component selections that will define the External Feeder–Assisted Filament Change system.
 
-## Overview
-
-This folder will contain all printable and mechanical files needed to build EFAC-A1, including STL files, CAD source files, and assembly references.
-
-EFAC-A1 is designed with the following hardware philosophy:
-
-- **Print it yourself** — all structural parts are designed for FDM printing in standard PLA. No exotic materials required.
-- **Designed with repairability in mind** — the goal is for components to be individually replaceable rather than requiring full system replacement. Final modularity details will be confirmed at v1.0.0.
-- **Scale it yourself** — the base unit supports 4 colors. Each expansion unit adds 4 more. The architecture supports up to 32 colors theoretically.
-
-## What will be included
-
-- STL files for all printed parts (feeder body, gear housing, lever arm, mounts)
-- CAD source files (STEP)
-- Bill of Materials (BOM) with part counts per unit
-- Assembly reference images
-
-## Design Notes
-
-All parts are dimensionally validated against physical hardware before being released. Tolerances are tuned for standard FDM printing — no supports required where avoidable, and critical fit dimensions are verified through iterative test prints.
-
-The engagement/disengagement mechanism uses an **MG90S micro servo** per pair of feeder slots, deliberately chosen to keep cost and bulk minimal. The 25GA-370 geared DC motors handle filament drive per slot.
-
-## Print Settings (preliminary)
-
-| Setting | Value |
-|---|---|
-| Material | PLA |
-| Layer Height | 0.2mm |
-| Infill | 20–40% depending on part |
-| Supports | Part-dependent (noted per STL) |
+## Purpose
+- It will document the physical hardware required for EFAC‑A1.  
+- It will allow reproducible builds for community members.  
+- It will support experimentation, modifications, and improvements.
 
 ## License
+All hardware design files in this folder will be licensed under the  
+**CERN Open Hardware Licence v2 – Strongly Reciprocal (CERN‑OHL‑S)**.  
 
-CERN-OHL-S-2.0 — see the root [LICENSE](https://github.com/Hans930v/EFAC-A1/blob/main/Hardware/LICENSE_HARDWARE) file.
+This will ensure that any modifications or derived hardware designs remain open and shared under the same terms.  
+The full license text will be available in [LICENSE](LICENSE).
+
+## Acknowledgements
+- Original AMS hardware logic will remain credited to **Bambu Lab**  
+- Community contributions will continue to be recognized from **avatorl**, **steven52880**, and **MrMonkey1302**  
+- EFAC‑A1 external feeder hardware integration will be developed and maintained by **Hansoy**
+
+## More Information
+For firmware, G‑code, schematics, and the full licensing breakdown, you will be able to refer to the [main README](https://github.com/Hans930v/EFAC-A1/blob/main/README.md).
