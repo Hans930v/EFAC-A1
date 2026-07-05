@@ -32,7 +32,21 @@ This project builds on those foundations and continues to evolve through communi
 | 1.0.0 release | Pending |
 
 ## How It Works
-EFAC-A1 uses external hardware to automatically change filaments, mimicking the AMS behavior on Bambu Lab printers. It integrates seamlessly with the EFAC custom G-code and works without requiring any changes to the printer’s firmware.
+EFAC-A1 uses **PESA** (Position-Encoded Slot Assignment) — its own communication protocol — to coordinate between the printer and external feeder without any firmware modification. See the PESA section below for full details.
+
+## PESA — Position-Encoded Slot Assignment
+
+PESA is the communication protocol at the heart of EFAC-A1. From the Filipino word *"pyesa"* meaning part, PESA is the part that makes EFAC-A1 work.
+
+### How PESA Works
+The printer moves its toolhead to a specific X-axis position encoded from the slicer's native `NEXT_EXTRUDER` variable using a simple linear formula: X = -19 + (next_extruder × 10mm)
+
+A VL53L0X Time-of-Flight sensor reads that position as a distance, decodes it as a slot number, and triggers the external feeder to load the correct filament — all without touching Bambu Lab's proprietary firmware or hardware.
+
+### Why PESA is Unique
+Every other open-source multi-material system targets open-source printers where firmware is accessible. PESA is designed specifically for a closed-firmware printer — turning the printer's own motion into a unidirectional communication channel. No reverse engineering, no proprietary protocols, no firmware modifications. Just movement.
+
+> This communication method is believed to be novel. Public documentation serves as prior art.
 
 ## Slicer Estimates vs Actual Weighing
 ### Bambu Studio: <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2c704cb0-1f68-4d7f-addb-1aa7ff3d6b10" />
@@ -40,29 +54,22 @@ EFAC-A1 uses external hardware to automatically change filaments, mimicking the 
 ### Actual: <img width="1080" height="1383" alt="image" src="https://github.com/user-attachments/assets/0e4348db-0144-410f-b911-c2487b44f231" />
 
 ## Change Filament G-codes
-> **Note:** EFAmC stands for *External Feeder‑Assisted manual Change*.  
-> It refers to the manual filament change workflow that does not require hardware.
-> 
-> **Disclaimer**: These are **NOT** official Bambu Lab G‑codes.  
-> They are community‑developed, experimental files intended for use with EFAC‑A1 hardware.
+> **Disclaimer**: This is **NOT** official Bambu Lab G‑code.  
+> These are community‑developed, experimental files intended for use with EFAC‑A1 hardware.
 
-### Semi-Automatic Change Filament Gcode
-For users who want the full EFAC-A1 (external hardware required): [**Change Filament Gcode for EFAC-A1**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAC-A1.gcode)
-
-### Manual Change Filament Gcode (obsolete)
-For users who prefer manual filament change (no hardware): [**Change Filament Gcode for EFAmC-A1**](https://github.com/Hans930v/bambu-a1-g-code/blob/EFAC-A1-EXPERIMENTAL/change-filament/EFAmC-A1.gcode)
+EFAC-A1 G-code: [**Change Filament Gcode for EFAC-A1**](https://github.com/Hans930v/EFAC-A1/blob/main/G-code/EFAC-A1-Gcode.gcode)
 
 ## Features
 - **Software-Safe**: No printer firmware modifications required.
 - **External Feeder**: Works with an external filament feeder to enable AMS-like behavior.
 - **Multi-Filament Support**: Easily handle multiple filaments for diverse printing needs.
 - **Compatible with Bambu Studio**: Fully compatible with Bambu Studio for filament changes.
+- **PESA Protocol**: A communication method that uses the printer's own X-axis motion as a data channel — no proprietary protocol access required.
 
 ### Step‑by‑Step Process
 
 1. **G‑code Workflow**  
-   Copy the provided G‑code files for EFAC‑A1.  
-   *(Note: EFAmC is for manual changes only and does not require hardware.)*
+   Copy the provided G‑code file for EFAC‑A1.  
 
 2. **External Feeder Setup**  
    Install the external feeder and position the sensors in their designated locations on the printer.
@@ -153,6 +160,8 @@ For Main System (Required Base, 4 Colors):
 
 # Disclaimer
 EFAC‑A1 is an **UNOFFICIAL**, community‑driven project and is **NOT** affiliated with Bambu Lab. It does **NOT** replace the official AMS — think of it as a community-built companion for those who want multi-color printing without the AMS price tag.
+> The PESA communication method is documented here as public prior art (first documented: 2026). 
+> This prevents third-party patents on the method while keeping it open for everyone.
 
 That said, this is a **user-driven** solution that requires **MANUAL SETUP**, hardware assembly, EFAC firmware, and **CUSTOM G-codes** — so please read through everything before diving in, and test thoroughly before relying on it for real prints. All modifications are done at your own risk.
 
