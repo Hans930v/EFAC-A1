@@ -6,8 +6,8 @@ EFAC-A1 enables an **AMS-like** filament change workflow using an external feede
 
 ## Acknowledgments
 
-A big thanks to [**3dnaut(MakerWorld)**](https://makerworld.com/en/models/1534741-multi-color-without-ams-with-ams-test#profileId-1609872)/[**avatorl(GitHub)**](https://github.com/avatorl/bambu-a1-g-code) for providing the starting point of the custom G‑code used in EFAC‑A1. 
-Additional appreciation goes to [**MrMonkey1302**](https://github.com/avatorl/bambu-a1-g-code/pull/17) for his PR introducing the current‑boost idea, which has been integrated into EFAC-A1's G-code.
+A big thanks to [**3dnaut(MakerWorld)**](https://makerworld.com/en/models/1534741-multi-color-without-ams-with-ams-test#profileId-1609872)/[**Andrzej Leszkiewicz(GitHub)**](https://github.com/avatorl/bambu-a1-g-code) for providing the starting point of the custom G‑code used in EFAC‑A1. 
+Additional appreciation goes to [**MrMonkey**](https://github.com/avatorl/bambu-a1-g-code/pull/17) for his PR introducing the current‑boost idea, which has been integrated into EFAC-A1's G-code.
 This project builds on those foundations and continues to evolve through community contributions.
 
 
