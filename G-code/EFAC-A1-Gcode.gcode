@@ -37,6 +37,9 @@
 ;
 ; This version only extends the workflow to support external hardware.
 ; =========================================================================
+; License: MIT (see https://github.com/Hans930v/EFAC-A1/blob/main/G-code/LICENSE)
+; Copyright (c) 2026 Andrzej Leszkiewicz
+; Copyright (c) 2026 Hans930v
 
 
 ; === Initialization ===
