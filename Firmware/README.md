@@ -1,31 +1,29 @@
-# EFAC-A1 Firmware
+# Firmware (WIP)
 
-> ⚠️ **Work In Progress** — Firmware files will be published here upon the official v1.0.0 release.
+This folder will contain the **firmware source code** for the EFAC‑A1 project.  
+It will provide the embedded logic required to control the External Feeder–Assisted filament Change system without relying on the AMS port or AMS firmware.
 
-## Overview
+## Status
+- The firmware will remain a **work in progress (WIP)** until hardware integration is finalized.  
+- Features will be added and tested incrementally.  
+- A stable release will be published once the EFAC‑A1 hardware and firmware are fully synchronized.
 
-The EFAC-A1 firmware is built on the **ESP32 platform** using **PlatformIO + VS Code** as the development environment. It is written in C++ and structured as a modular, multi-file project — not a single sketch.
-
-The firmware is responsible for:
-
-- Interpreting filament slot commands received via the custom EFAC G-code
-- Controlling the feeder state machine
-- Managing servo indexing for gear engagement/disengagement per slot
-- Driving DC motors via motor driver modules for filament push/pull
-- Reading filament presence sensors and slot interpretations
-- Handling OLED UI feedback
-- Delivering **OTA (Over-the-Air) firmware updates via Wi-Fi** — this is the sole purpose of Wi-Fi connectivity in EFAC-A1. No data is collected, transmitted, or stored externally.
-
-## Why the source isn't here yet
-
-EFAC-A1 is still in active development. The mechanical system is being finalized and the firmware is being validated against real hardware before a stable release is published. Releasing incomplete firmware prematurely risks misleading builders or causing hardware damage.
-
-**The full source will be released at v1.0.0** — open, documented, and ready to build.
-
-## Privacy
-
-EFAC-A1 uses Wi-Fi **exclusively** for OTA firmware updates. It does not phone home, collect data, or require any cloud account. The source code will be fully open so anyone can verify this themselves.
+## Purpose
+- It will define the communication between printer, cutter, wiper, and external feeder.  
+- It will ensure safe, reliable filament changes using EFAC‑A1 hardware.  
+- It will support future extensions, optimizations, and community contributions.
 
 ## License
+The firmware will be licensed under the  
+**GNU General Public License v3 (GPLv3)**.  
 
-AGPL-3.0 — see the root [LICENSE](../LICENSE) file.
+This will ensure that any modifications or derived firmware remain open and shared under the same terms.  
+The full license text will be available in [LICENSE](LICENSE).
+
+## Acknowledgements
+- Original AMS firmware logic will remain credited to **Bambu Lab**  
+- Community contributions will continue to be recognized from **avatorl**, **steven52880**, and **MrMonkey1302**  
+- EFAC‑A1 firmware development will be maintained by **Hansoy**
+
+## More Information
+For hardware, schematics, G‑code, and the full licensing breakdown, you will be able to refer to the [main README](../README.md).
