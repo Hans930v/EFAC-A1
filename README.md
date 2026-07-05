@@ -161,9 +161,10 @@ For Main System (Required Base, 4 Colors):
 ---
 
 # Disclaimer
-EFAC‑A1 is an **UNOFFICIAL**, community‑driven project and is **NOT** affiliated with Bambu Lab. It does **NOT** replace the official AMS — think of it as a community-built companion for those who want multi-color printing without the AMS price tag.
 > The PESA communication method is documented here as public prior art (first documented: 2026). 
 > This prevents third-party patents on the method while keeping it open for everyone.
+
+EFAC‑A1 is an **UNOFFICIAL**, community‑driven project and is **NOT** affiliated with Bambu Lab. It does **NOT** replace the official AMS — think of it as a community-built companion for those who want multi-color printing without the AMS price tag.
 
 That said, this is a **user-driven** solution that requires **MANUAL SETUP**, hardware assembly, EFAC firmware, and **CUSTOM G-codes** — so please read through everything before diving in, and test thoroughly before relying on it for real prints. All modifications are done at your own risk.
 
