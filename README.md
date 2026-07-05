@@ -66,6 +66,7 @@ EFAC-A1 G-code: [**Change Filament Gcode for EFAC-A1**](https://github.com/Hans9
 - **Compatible with Bambu Studio**: Fully compatible with Bambu Studio for filament changes.
 - **PESA Protocol**: A communication method that uses the printer's own X-axis motion as a data channel — no proprietary protocol access required.
 
+
 ### Step‑by‑Step Process
 
 1. **G‑code Workflow**  
@@ -79,6 +80,7 @@ EFAC-A1 G-code: [**Change Filament Gcode for EFAC-A1**](https://github.com/Hans9
 
 4. **Flush Volumes**  
    Automatic purging ensures clean filament transitions, with flush volumes calibrated for reliable multi‑color printing.
+
 
 ## Hardware
 For Main System (Required Base, 4 Colors):
