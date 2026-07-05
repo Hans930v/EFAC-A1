@@ -1,7 +1,7 @@
 ; =========================================================================
 ; Acknowledgements:
-;   - avatorl & steven52880 for the manual filament change baseline
-;   - MrMonkey1302 for the proposed current boost & homing PR
+;   - Andrzej Leszkiewicz & Steven Wu for the manual filament change baseline
+;   - MrMonkey for the proposed current boost & homing PR
 ;   - Bambu Lab for the original AMS G-code logic
 ; =========================================================================
 ; EFAC-A1: External Feeder–Assisted Filament Change for Bambu Lab A1 (EXPERIMENTAL)
@@ -20,9 +20,9 @@
 ; Original Files:
 ;   - AMS reference version (A1 2025-10-31):
 ;      https://github.com/Hans930v/bambu-a1-g-code/blob/main/change-filament/change-filament-original.gcode
-;   - Manual Filament Change v3 by avatorl & steven52880:
+;   - Manual Filament Change v3 by Andrzej Leszkiewicz & Steven Wu:
 ;      https://github.com/avatorl/bambu-a1-g-code/blob/main/change-filament/a1-manual-filament-change-v3.gcode
-;	- Pull Request by MrMonkey1302:
+;	- Pull Request by MrMonkey:
 ;	   https://github.com/avatorl/bambu-a1-g-code/pull/17
 ;
 ; =========================================================================
