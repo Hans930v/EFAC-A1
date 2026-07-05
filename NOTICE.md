@@ -4,8 +4,7 @@ EFAC‑A1 is licensed under the **GNU Affero General Public License v3.0 (AGPL�
 
 Large portions of the **Change Filament G‑code** are derived from work by [avatorl](https://github.com/avatorl/bambu-a1-g-code) / [3dnaut](https://makerworld.com/en/models/1534741-multi-color-without-ams-with-ams-test#profileId-1609872), used under the **MIT License**. The MIT license text is included in `/G-code/LICENSE`.
 
-The **3D models, CAD assets, and schematics** in this repository are licensed under the  
-**CERN Open Hardware Licence v2 – Strongly Reciprocal (CERN‑OHL‑S)**.  
+The **3D models, CAD assets, and schematics** in this repository are licensed under the **CERN Open Hardware Licence v2 – Strongly Reciprocal (CERN‑OHL‑S)**.  
 This ensures that any modifications or derived hardware designs and circuit schematics remain open and shared under the same terms.
 
 ---
