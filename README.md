@@ -160,7 +160,7 @@ For Main System (Required Base, 4 Colors):
 
 ---
 
-## Licensing
+# License
 - EFAC‑A1 Code & Firmware → AGPL‑3.0  
 - Change Filament G‑code → MIT (see `/G-code/LICENSE`)  
 - 3D Models & CAD assets → CERN‑OHL‑S v2 (see `/models/LICENSE`)  
