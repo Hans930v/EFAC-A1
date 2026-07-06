@@ -11,7 +11,7 @@ Additional appreciation goes to [**MrMonkey**](https://github.com/avatorl/bambu-
 This project builds on those foundations and continues to evolve through community contributions.
 
 
-## Why EFAC?
+## Why EFAC-A1?
 - The Bambu Lab AMS is great, but not everyone can afford one.
 - EFAC mimics AMS behavior using external hardware or manual swaps.
 - **Firmware‑safe**: uses official AMS flush logic, so slicer reports stay accurate.
