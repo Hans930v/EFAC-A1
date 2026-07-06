@@ -17,7 +17,7 @@ The full license text will be available in [LICENSE](LICENSE).
 
 ## Acknowledgements
 - Original AMS logic will remain credited to **Bambu Lab**  
-- Community contributions will continue to be recognized from **avatorl**, **steven52880**, and **MrMonkey1302**  
+- Community contributions will continue to be recognized from **Andrzej Leszkiewicz**, **Steven Wu**, and **MrMonkey**  
 - EFAC‑A1 external feeder integration will be developed and maintained by **Hansoy**
 
 ## More Information
