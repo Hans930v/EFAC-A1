@@ -27,4 +27,4 @@ This ensures that any modifications or derived hardware designs remain open and 
 See [LICENSE](/Hardware/LICENSE) in this folder for full details.
 
 ## More Information
-For electronics, schematics, firmware, and G‑code, refer to the [main README](../../README.md) and the [/hardware/electronics](../electronics/) folder.
+For electronics, schematics, firmware, and G‑code, refer to the [main README](../../README.md) and the [/Hardware/Electronics](../Electronics/) folder.
