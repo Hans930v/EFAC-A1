@@ -12,7 +12,8 @@
 This document is a **defensive publication** intended to establish prior art. 
 It is dedicated to the **public domain** under the **CC0 1.0 Universal (CC0 1.0) Public Domain Dedication**. 
 
-To the fullest extent permitted by law, the author waives all copyright and related rights to this specification. This ensures that any patent office, examiner, or third party may freely use this document to reject any later patent claims covering the methods described herein.
+By publishing it openly, the protocol is established as prior art.  
+It may be freely used, copied, and referenced without restriction.
 
 *(See [LICENSE](LICENSE) in this folder for the full legal text.)*
 
