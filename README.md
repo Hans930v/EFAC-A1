@@ -161,10 +161,10 @@ For Main System (Required Base, 4 Colors):
 ---
 
 # License
-- EFAC‑A1 Code & Firmware → AGPL‑3.0  
-- Change Filament G‑code → MIT (see `/G-code/LICENSE`)  
-- 3D Models & CAD assets → CERN‑OHL‑S v2 (see `/models/LICENSE`)  
-- Schematics → CERN‑OHL‑S v2 (see `/schematics/LICENSE`)  
+- EFAC‑A1 Code & Firmware → GNU General Public License v3.0 
+- Change Filament G‑code → MIT License (see `/G-code/LICENSE`)  
+- 3D Models & CAD assets → CERN‑OHL‑S v2 (see `/3D Models/LICENSE`)  
+- Schematics → CERN‑OHL‑S v2 (see `/Schematics/LICENSE`)  
 
 See [NOTICE.md](NOTICE.md) for full details.
 
