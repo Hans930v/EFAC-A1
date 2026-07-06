@@ -21,4 +21,4 @@ The full license text will be available in [LICENSE](/Hardware/LICENSE).
 - EFAC‑A1 external feeder integration, firmware, and hardware design developed and maintained by **Hansoy**
 
 ## More Information
-For the full project overview, firmware, G‑code, and licensing breakdown, you will be able to refer to the [main README](../README.md).
+For the full project overview, firmware, G‑code, and licensing breakdown, you will be able to refer to the [main README](/README.md).
