@@ -270,7 +270,7 @@ This document is governed by a **different license** from the rest of the EFAC-A
 ### Version History
 
 | Version | Date | Author | Changes |
-| :---: | :---: | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | 1.0 | 2026-07-06 | Hans930v (Hansoy) | Initial public release. Defensive publication. |
 | 1.1 | 2026-07-06 | Hans930v (Hansoy) | Corrected hardware topology to include hall-effect sensor as non-contact arming signal. Updated Overview, Section 2, Section 4 intro, Section 4.3, Section 5, and Section 6.2 to accurately reflect two-sensor architecture and event-driven state machine. |
 
