@@ -25,7 +25,7 @@ All electronic design files in this folder are licensed under the
 **CERN Open Hardware Licence v2 – Strongly Reciprocal (CERN‑OHL‑S)**.  
 
 This ensures that any modifications or derived hardware designs remain open and shared under the same terms.  
-See [LICENSE](LICENSE) in this folder for full details.
+See [LICENSE](/Hardware/LICENSE) in this folder for full details.
 
 ## More Information
 For firmware, CAD models, G‑code macros, and the full licensing breakdown, refer to the [main README](../README.md).
