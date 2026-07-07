@@ -248,9 +248,9 @@ The G-code already contains a commented-out section for 29-slot operation:
 
 #### 7.2 Theoretical Maximum Slot Count
 
-While the current implementation supports up to 20 slots reliably and can be extended to 29 with VL53L1X (theoretically), the theoretical maximum is **32 slots**.  
-Achieving this requires a distance sensor with finer millimeter-level resolution and stability than the VL53L0X.  
-Without higher accuracy, tolerance bands would overlap at the extreme ends of travel, making reliable decoding impossible.
+While the current implementation supports up to 20 slots reliably and can be extended to 29 with VL53L1X (theoretically), the theoretical maximum is approximately **32 slots**, achievable only by 
+reducing slot spacing below 10 mm — which in turn requires a sensor with 
+finer resolution than the VL53L0X to maintain reliable tolerance separation.
 
 ---
 
